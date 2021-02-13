@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ErrorHandling\ErrorHandling_PCL.csproj" />
+    <ProjectReference Include="..\Model_PCL\Model_PCL.csproj" />
+  </ItemGroup>
+
+</Project>

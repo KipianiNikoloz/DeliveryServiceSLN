@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ErrorHandling\ErrorHandling_PCL.csproj" />
+    <ProjectReference Include="..\Model_PCL\Model_PCL.csproj" />
+    <ProjectReference Include="..\Services_PCL\Services_PCL.csproj" />
+  </ItemGroup>
+
+</Project>
