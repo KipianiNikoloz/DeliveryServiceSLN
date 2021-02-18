@@ -1,58 +1,30 @@
 ﻿using ErrorHandling_PCL.Abstraction.Model;
 using ErrorHandling_PCL.Implementation.Model;
 using Model_PCL.Abstraction;
+using Model_PCL.Enums;
 using Model_PCL.Imlementation;
 using Services_PCL.Abstraction;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace Services_PCL.Implementation
 {
-    public class Shop : IShop
+    public class LoginService : ILoginService
     {
-        private List<IProduct> ProductList = new List<IProduct>();
-
-        public Func<IProduct, bool> GetProductToDelivery { get; set; }
+        private List<IUser> UserList = new List<IUser>();
         public Action<IErrorMessage> ErrorHandler { get; set; }
 
-        public bool GetOrderFromDelivery(IOrder NewOrder)
+        public bool Add(string FullName, string Email, string ID, string Password, int Age, GenderType Gender, double Balance)
         {
             try
             {
-                string tmpStr = NewOrder.Name;
+                var Tmp = Create(FullName, Email, ID, Password, Age, Gender, Balance);
 
-                var Tmp = Search(tmpStr);
-                Remove(tmpStr);
-                GetProductToDelivery.Invoke(Tmp);
-                
-                return true;
-                
-            }
-            catch (Exception ex)
-            {
-                IErrorMessage CustomEx = new ErrorMessage
-                {
-                    Message = ex.Message,
-                    Location = "Consumer.cs"
-                };
+                UserList.Add(Tmp);
 
-                ErrorHandler.Invoke(CustomEx);
-                
-                return false;
-            }
-        }
-
-        public bool Add(string Name, double Price)
-        {
-            try
-            {
-                var Tmp = Create(Name, Price);
-
-                ProductList.Add(Tmp);
-
-                return ProductList.Any(o => o.Name == Name);
+                return UserList.Any(o => o.FullName == FullName);
             }
             catch (Exception ex)
             {
@@ -68,12 +40,11 @@ namespace Services_PCL.Implementation
             }
         }
 
-        public IProduct Create(string Name, double Price)
+        public IUser Create(string FullName, string Email, string ID, string Password, int Age, GenderType Gender, double Balance)
         {
-
             try
             {
-                return new Product { Name = Name, Price = Price}; ;
+                return new User { FullName = FullName, Email = Email, ID = ID, Password = Password, Age = Age, Gender = Gender, Balance = Balance }; ;
 
             }
             catch (Exception ex)
@@ -90,17 +61,36 @@ namespace Services_PCL.Implementation
             }
         }
 
+        public IUser LoginUserIntoSession(string Email, string Password)
+        {
+            try
+            {
+                return UserList.Find(o => o.Email == Email && o.Password == Password);
+            }
+            catch (Exception ex)
+            {
+                IErrorMessage CustomEx = new ErrorMessage
+                {
+                    Message = ex.Message,
+                    Location = "Consumer.cs"
+                };
+
+                ErrorHandler.Invoke(CustomEx);
+
+                return default;
+            }
+        }
 
         public bool Read()
         {
             try
             {
-                foreach(var item in ProductList)
+                foreach (var item in UserList)
                 {
-                    Console.WriteLine($"{item.Name} {item.Price}");
+                    Console.WriteLine($"{item.FullName} {item.Email} {item.ID} {item.Balance}");
                 }
 
-                return true; 
+                return true;
             }
             catch (Exception ex)
             {
@@ -116,15 +106,15 @@ namespace Services_PCL.Implementation
             }
         }
 
-        public bool Remove(string Name)
+        public bool Remove(string FullName)
         {
             try
             {
-                ProductList.Remove(Search(Name));
+                UserList.Remove(Search(FullName));
 
-                return !ProductList.Any(o => o.Name == Name);
+                return !UserList.Any(o => o.FullName == FullName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 IErrorMessage CustomEx = new ErrorMessage
                 {
@@ -138,11 +128,11 @@ namespace Services_PCL.Implementation
             }
         }
 
-        public IProduct Search(string Name)
+        public IUser Search(string FullName)
         {
             try
             {
-                return ProductList.FirstOrDefault(o => o.Name.ToLower() == Name.ToLower());
+                return UserList.FirstOrDefault(o => o.FullName.ToLower() == FullName.ToLower());
 
             }
             catch (Exception ex)
@@ -159,18 +149,21 @@ namespace Services_PCL.Implementation
             }
         }
 
-        public bool Update(string SearchName, string Name, double Price = 0)
+        public bool Update(string SearchName, string FullName = null, string Email = null, string ID = null, string Password = null, int Age = 0, GenderType Gender = GenderType.Default, double Balance = 0)
         {
             try
             {
                 var Tmp = Search(SearchName);
 
-                Tmp.Name = Name != null ? Tmp.Name = Name : Tmp.Name = Tmp.Name;
-                Tmp.Price = Price != 0 ? Tmp.Price = Price : Tmp.Price = Tmp.Price;
+                Tmp.FullName = FullName != null ? Tmp.FullName = FullName : Tmp.FullName = Tmp.FullName;
+                Tmp.Email = Email != null ? Tmp.Email = Email : Tmp.Email = Tmp.Email;
+                Tmp.ID = ID != null ? Tmp.ID = ID : Tmp.ID = Tmp.ID;
+                Tmp.Password = Password != null ? Tmp.Password = Password : Tmp.Password = Tmp.Password;
+                Tmp.Age = Age != 0 ? Tmp.Age = Age : Tmp.Age = Tmp.Age;
+                Tmp.Gender = Gender != GenderType.Default ? Tmp.Gender = Gender : Tmp.Gender = Tmp.Gender;
+                Tmp.Balance = Balance != 0 ? Tmp.Balance = Balance : Tmp.Balance = Tmp.Balance;
 
-                bool Check = ProductList.Any(o => o == Tmp);
-
-                return Check;
+                return UserList.Any(o => o == Tmp);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using Model_PCL.Abstraction;
 using Model_PCL.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Model_PCL.Imlementation
@@ -20,10 +21,18 @@ namespace Model_PCL.Imlementation
 
         public string Email { get; set; }
         public string ID { get; set; }
+        public string Password { get; set; }
         public int Age { get; set; }
         public GenderType Gender { get; set; }
         public double Balance { get; set; }
+
+        [MaxLength(32)]
         public string FullName { 
+            get
+            {
+                return FirstName + LastName;
+            }
+            
             set 
             {
                 value = FirstName + LastName; 

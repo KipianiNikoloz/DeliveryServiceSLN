@@ -7,7 +7,7 @@ namespace Model_PCL.Abstraction
 {
     public interface IHuman
     {
-        string FullName { set; }
+        string FullName { get; set; }
         int Age { get; set; }
         GenderType Gender { get; set; }
     }

@@ -4,5 +4,5 @@ using System.Text;
 
 namespace Model_PCL.Enums
 {
-   public enum GenderType { Male, Female, Other }
+   public enum GenderType { Male, Female, Other, Default }
 }

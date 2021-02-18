@@ -12,6 +12,7 @@ namespace Model_PCL.Abstraction
 
         string Email { get; set; }
         string ID { get; set; }
+        string Password { get; set; }
         double Balance { get; set; }
 
         bool GetOrder(IProduct NewProduct);

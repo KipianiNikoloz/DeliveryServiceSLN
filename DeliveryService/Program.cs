@@ -16,6 +16,7 @@ namespace DeliveryService
             IConsumer ConsumerService = new Consumer();
             IDelivery DeliveryService = new Delivery();
             IShop ShopService = new Shop();
+            ILoginService LoginServices = new LoginService();
 
             IErrorService ErrorServices = new ErrorService();
 
@@ -29,22 +30,15 @@ namespace DeliveryService
             ShopService.ErrorHandler = ErrorServices.AddError;
 
             ShopService.Add("Sushi", 23);
+            LoginServices.Add("Nikoloz Kipiani", "nikolozkipiani2005@gmail.com", "1", "123456789", 15, GenderType.Male, 30);
 
-            IUser NewUser = new User
-            {
-                FirstName = "Nikoloz",
-                LastName = "Kipiani",
-                Email = "nikolozkipiani2005@gmail.com",
-                ID = "1",
-                Gender = GenderType.Male,
-                Balance = 30
-            };
+            IUser CurrentUser = LoginServices.LoginUserIntoSession("nikolozkipiani2005@gmail.com", "123456789");
 
-            ConsumerService.GetOrderToUser = NewUser.GetOrder;
-            NewUser.MakeOrderToCustomer = ConsumerService.MakeOrder;
-            NewUser.ErrorHandler = ErrorServices.AddError;
+            ConsumerService.GetOrderToUser = CurrentUser.GetOrder;
+            CurrentUser.MakeOrderToCustomer = ConsumerService.MakeOrder;
+            CurrentUser.ErrorHandler = ErrorServices.AddError;
 
-            bool test = NewUser.MakeOrderToCustomer("Sushi"); 
+            bool test = CurrentUser.MakeOrderToCustomer("Sushi"); 
 
             Console.WriteLine("Test finished!");
         }
