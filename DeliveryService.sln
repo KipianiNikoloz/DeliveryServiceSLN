@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService", "DeliveryService\DeliveryService.csproj", "{977CEF0B-3B99-43AC-B296-89ECF4E9593B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService", "DeliveryService\DeliveryService.csproj", "{977CEF0B-3B99-43AC-B296-89ECF4E9593B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model_PCL", "Model_PCL\Model_PCL.csproj", "{7F6BAEF5-A5E5-4BBE-8EE6-BB01B01A7BBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model_PCL", "Model_PCL\Model_PCL.csproj", "{7F6BAEF5-A5E5-4BBE-8EE6-BB01B01A7BBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services_PCL", "Services_PCL\Services_PCL.csproj", "{AE42A722-455F-4261-89D7-5AD9B1472CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services_PCL", "Services_PCL\Services_PCL.csproj", "{AE42A722-455F-4261-89D7-5AD9B1472CDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorHandling_PCL", "ErrorHandling\ErrorHandling_PCL.csproj", "{F764B0DE-6AE8-4D9F-8FD5-AF249A055422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorHandling_PCL", "ErrorHandling\ErrorHandling_PCL.csproj", "{F764B0DE-6AE8-4D9F-8FD5-AF249A055422}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0AA153B-25C3-4CB0-B8A9-AF7F24AE7369}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
