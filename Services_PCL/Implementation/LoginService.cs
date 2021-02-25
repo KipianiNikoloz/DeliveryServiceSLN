@@ -16,6 +16,25 @@ namespace Services_PCL.Implementation
         private List<IUser> UserList = new List<IUser>();
         public Action<IErrorMessage> ErrorHandler { get; set; }
 
+        private static object _Root = new object();
+        private static ILoginService _Instance = null;
+
+        public static ILoginService GetInstance
+        {
+            get
+            {
+                lock (_Root)
+                {
+                    if(_Instance == null)
+                    {
+                        _Instance = new LoginService();
+                    }
+
+                    return _Instance;
+                }
+            }
+        }
+
         public bool Add(string FullName, string Email, string ID, string Password, int Age, GenderType Gender, double Balance)
         {
             try
@@ -178,5 +197,7 @@ namespace Services_PCL.Implementation
                 return default;
             }
         }
+
+        private LoginService() { }
     }
 }

@@ -13,12 +13,12 @@ namespace DeliveryService
     {
         static void Main()
         {
-            IConsumer ConsumerService = new Consumer();
-            IDelivery DeliveryService = new Delivery();
-            IShop ShopService = new Shop();
-            ILoginService LoginServices = new LoginService();
+            IConsumer ConsumerService = Consumer.GetInstance();
+            IDelivery DeliveryService = Delivery.GetInstance();
+            IShop ShopService = Shop.GetInstance();
+            ILoginService LoginServices = LoginService.GetInstance();
 
-            IErrorService ErrorServices = new ErrorService();
+            IErrorService ErrorServices = ErrorService.GetInstance();
 
             ConsumerService.GetOrderToDelivery = DeliveryService.GetOrderFromCustomer;
             DeliveryService.GetOrderToShop = ShopService.GetOrderFromDelivery;

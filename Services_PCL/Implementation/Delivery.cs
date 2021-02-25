@@ -15,6 +15,25 @@ namespace Services_PCL.Implementation
         public Action<IErrorMessage> ErrorHandler { get; set; }
         public Func<IProduct, bool> GetProductToCustomer { get; set; }
 
+        private static object _Root = new object();
+        private static IDelivery _Instance = null;
+
+        public static IDelivery GetInstance
+        {
+            get
+            {
+                lock (_Root)
+                {
+                    if (_Instance == null)
+                    {
+                        _Instance = new Delivery();
+                    }
+
+                    return _Instance;
+                }
+            }
+        }
+
         public bool GetOrderFromCustomer(string Name)
         {
             try
@@ -62,5 +81,7 @@ namespace Services_PCL.Implementation
                 return false;
             }
         }
+
+        private Delivery() { }
     }
 }

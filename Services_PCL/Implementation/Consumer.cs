@@ -14,6 +14,25 @@ namespace Services_PCL.Implementation
         public Func<IProduct, bool> GetOrderToUser { get; set; }
         public Action<IErrorMessage> ErrorHandler { get; set; }
 
+        private static object _Root = new object();
+        private static IConsumer _Instance = new Consumer();
+
+        public static IConsumer GetInstance
+        {
+            get
+            {
+                lock (_Root)
+                {
+                    if (_Instance == null)
+                    {
+                        _Instance = new Consumer();
+                    }
+
+                    return _Instance;
+                }
+            }
+        }
+
         public bool GetOrder(IProduct NewProduct)
         {
             try

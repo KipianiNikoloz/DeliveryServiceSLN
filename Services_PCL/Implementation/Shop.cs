@@ -17,6 +17,25 @@ namespace Services_PCL.Implementation
         public Func<IProduct, bool> GetProductToDelivery { get; set; }
         public Action<IErrorMessage> ErrorHandler { get; set; }
 
+        private static object _Root = new object();
+        private static IShop _Instance = new Shop();
+
+        public static IShop GetInstance
+        {
+            get
+            {
+                lock (_Root)
+                {
+                    if (_Instance == null)
+                    {
+                        _Instance = new Shop();
+                    }
+
+                    return _Instance;
+                }
+            }
+        }
+
         public bool GetOrderFromDelivery(IOrder NewOrder)
         {
             try
@@ -185,5 +204,7 @@ namespace Services_PCL.Implementation
                 return default;
             }
         }
+
+        private Shop() { }
     }
 }

@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ErrorHandling\ErrorHandling_PCL.csproj" />
     <ProjectReference Include="..\Model_PCL\Model_PCL.csproj" />
     <ProjectReference Include="..\Services_PCL\Services_PCL.csproj" />
